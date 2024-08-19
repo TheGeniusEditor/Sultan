@@ -47,6 +47,7 @@
             <li id="rot"><a class="filter" data-filter=".rot">Roti</a></li>
             <li id="nig"><a class="filter" data-filter=".nig">North Indian Gravy</a></li>
             <li id="vg"><a class="filter" data-filter=".vg">Veg Gravy</a></li>
+            <li id="b"><a class="filter" data-filter=".b">Bevrages</a></li>
           </ul>
         </div>
 
@@ -372,7 +373,12 @@
         { title: "Dal Tadka (Half)", price: "100/-"},
         { title: "Dal Tadka (Full)", price: "170/-"}
       ],
-
+      "b":[
+       { title: "Cool drinks 250ml (glass)", price: "15/-"},
+       { title: "Cool drinks 250ml (Normal)", price: "20/-"},
+       { title: "Water 500ml", price: "10/-"},
+       { title: "Water 1L", price: "20/-"}
+      ]
     };
         function renderMenuItems() {
             const menuWrapper = document.getElementById('menu-wrapper');
@@ -397,7 +403,7 @@
             });
         }
 
-        const items = ['fv', 'shawarma', 'burger', 'fish', 'subn', 'subv', 'rnv', 'rv', 'snv', 'sv', 'fnv', 'cnv', 'cv', 'soupn', 'soupv', 'bir', 'tan', 'tik', 'rot', 'nig', 'vg'];
+        const items = ['fv', 'shawarma', 'burger', 'fish', 'subn', 'subv', 'rnv', 'rv', 'snv', 'sv', 'fnv', 'cnv', 'cv', 'soupn', 'soupv', 'bir', 'tan', 'tik', 'rot', 'nig', 'vg', 'b'];
 
         items.forEach(id => {
             document.getElementById(id).onclick = () => {
