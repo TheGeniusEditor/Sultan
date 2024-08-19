@@ -1,0 +1,531 @@
+/*
+    Theme Name: Delicious
+    Theme URL: https://bootstrapmade.com/delicious-free-restaurant-bootstrap-theme/
+    Author: BootstrapMade.com
+    Author URL: https://bootstrapmade.com
+*/
+
+body {
+    font-size: 16px;
+    line-height: 1.52;
+    color: #000000;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+}
+
+#banner {
+    background: url(../img/banner-bg.jpg) no-repeat center top;
+    background-size: cover;
+    min-height: 630px;
+}
+
+.bg-color {
+    background-color: RGBA(0, 0, 0, 0.61);
+    min-height: 630px;
+}
+
+#banner h2 {
+    font-family: 'Satisfy', sans-serif;
+    font-size: 45px;
+    color: #FFB03B;
+}
+
+#banner p {
+    font-family: 'PT Sans', sans-serif;
+    color: #fcfcfc;
+    font-size: 34px;
+}
+
+.section-padding {
+    padding: 60px 0px;
+}
+
+.logo-name {
+    font-family: 'Satisfy', sans-serif;
+    font-size: 65px;
+    margin-top: 140px;
+    color: #FFB03B;
+}
+
+.header-h {
+    color: #FFB03B;
+    font-size: 46px;
+    font-family: 'Satisfy', sans-serif;
+    font-weight: 300;
+}
+
+.header-p {
+    color: #9699a6;
+    font-size: 16px;
+}
+
+.contact-form .form-control {
+    color: #000 !important;
+    font-size: 16px;
+    font-weight: normal;
+    height: 38px;
+    line-height: 1.42857;
+    padding: 7px 0;
+    border: 0;
+    background-image: linear-gradient(#009688, #009688), linear-gradient(#D2D2D2, #D2D2D2);
+    background-size: 0 2px, 100% 1px;
+    background-repeat: no-repeat;
+    background-position: center bottom, center calc(100% - 1px);
+    background-color: rgba(0, 0, 0, 0);
+    transition: background 0s ease-out;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+.contacts-btn {
+    background-color: #FFB03B !important;
+    color: #000 !important;
+    width: 170px;
+    height: 54px;
+    border-radius: 3px;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    text-transform: capitalize;
+    border: 0px;
+}
+
+#sendmessage,
+#errormessage {
+    display: none;
+    padding: 15px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#sendmessage {
+    color: green;
+    border: 1px solid green;
+}
+
+#errormessage {
+    color: red;
+    border: 1px solid red;
+}
+
+#sendmessage.show,
+#errormessage.show {
+    display: block;
+}
+
+.heading {
+    font-family: 'Satisfy', sans-serif;
+    color: #FFB03B;
+    font-size: 24px;
+}
+
+.details-list ul li i {
+    margin-right: 10px;
+    color: #ffb03b;
+}
+
+#about img {
+    border: 5px solid #FFB03B;
+    border-radius: 2px;
+}
+
+.menu-restaurant {
+    width: 50%;
+    float: left;
+    padding: 15px;
+    position: relative;
+}
+
+.menu-restaurant .menu-title {
+    float: left;
+    font-family: 'Montserrat', arial;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #000000;
+}
+
+.menu-restaurant .menu-line {
+    position: absolute;
+    bottom: 6px;
+    margin-left: .6rem;
+    margin-right: .6rem;
+}
+
+.menu-restaurant .menu-price {
+    font-weight: 600;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.menu-restaurant .menu-subtitle {
+    display: block;
+    float: left;
+    color: #B1B1B1;
+    font-family: 'Satisfy', 'Open Sans', arial;
+    font-size: 1.2rem;
+}
+
+.menu-restaurant span.clearfix {
+    position: relative;
+    display: block;
+}
+
+#menu-flters ul li a.active,
+#menu-flters ul li a:hover {
+    background: #FFB03B;
+    color: #fff;
+    border: 1px solid #FFB03B;
+}
+
+#menu-flters ul li a {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #565656;
+    border-radius: 0px;
+    border: 1px solid #BBBBBB;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.footer {
+    width: 100%;
+    background-color: #222;
+    position: relative;
+    z-index: 1;
+}
+
+.footer a {
+    color: #fff;
+}
+
+.footer .footer-top {
+    padding-top: 9rem;
+    padding-bottom: 5rem;
+}
+
+.footer .widget-title {
+    padding-bottom: 20px;
+    font-family: 'Satisfy', sans-serif;
+    font-size: 44px;
+    color: #FFB03B;
+}
+
+@media (max-width: 450px) {
+    .menu-restaurant {
+        width: 100%;
+    }
+    .header-h {
+        font-size: 35px;
+    }
+    .header-p,
+    body {
+        font-size: 14px;
+    }
+    #banner h2 {
+        font-size: 25px;
+    }
+    #banner p {
+        font-size: 25px;
+    }
+}
+#menu-flters ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-align: center; /* Center the buttons horizontally */
+}
+
+#menu-flters ul li {
+    display: inline-block; /* Align buttons in a single line */
+    margin: 0 10px; /* Add margin between buttons */
+}
+
+#menu-flters ul li a {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #565656;
+    border-radius: 0px;
+    border: 1px solid #BBBBBB;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block; /* Ensure links are inline-block */
+}
+
+#menu-flters ul li a.active,
+#menu-flters ul li a:hover {
+    background: #FFB03B;
+    color: #fff;
+    border: 1px solid #FFB03B;
+}
+#menu-flters ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  #menu-flters ul li {
+    display: inline;
+    margin-right: 10px;
+  }
+
+  #menu-flters ul li a {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #FFB03B;
+    color: #fff;
+    border-radius: 3px;
+  }
+
+  #menu-flters ul li a.active {
+    background-color: #f1f1f1;
+    color: #FFB03B;
+  }
+
+  #menu-flters ul li a:hover {
+    background-color: #f1f1f1;
+    color: #FFB03B;
+  }
+
+  .quantity-selection {
+    display: none;
+  }
+
+  .menu-item.selected .quantity-selection {
+    display: block;
+  }
+
+  .select-btn {
+    display: block;
+    width: 30%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #fff;
+    color:#4458e8;
+    border: 2px solid #4458e8;
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .select-btn.active {
+    background-color: #4458e8;
+    color: #fff;
+  }
+/* Cart Section Styles */
+#cart {
+    padding: 50px 0;
+  }
+  
+  #cart-items {
+    margin-bottom: 20px;
+  }
+  
+  .cart-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .cart-title {
+    font-weight: bold;
+  }
+  
+  .cart-price {
+    color: #FFB03B;
+  }
+  
+  .cart-quantity {
+    font-style: italic;
+  }
+  
+  /* Checkout Button Styles */
+  #checkout-btn {
+    background-color: #4458e8;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  #checkout-btn:hover {
+    background-color: #333;
+  }
+  /* Delete Button Styles */
+.delete-btn {
+    background-color: #f44336; /* Red color */
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px;
+  }
+  
+  .delete-btn:hover {
+    background-color: #d32f2f;
+  }
+  #menu-flters ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the buttons */
+    gap: 10px; /* Add space between buttons */
+  }
+  
+  #menu-flters ul li {
+    display: flex;
+    margin: 5px;
+  }
+  
+  #menu-flters ul li a {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #FFB03B;
+    color: #fff;
+    border-radius: 3px;
+    text-align: center;
+    min-width: 150px; /* Set a minimum width for consistency */
+  }
+  
+  #menu-flters ul li a.active {
+    background-color: #f1f1f1;
+    color: #FFB03B;
+  }
+  
+  #menu-flters ul li a:hover {
+    background-color: #f1f1f1;
+    color: #FFB03B;
+  }
+  #menu-flters ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  #menu-flters ul li {
+    display: inline;
+    margin-right: 10px;
+  }
+
+  #menu-flters ul li a {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #FFB03B;
+    color: #fff;
+    border-radius: 3px;
+  }
+
+  #menu-flters ul li a.active {
+    background-color: #f1f1f1;
+    color: #FFB03B;
+  }
+
+  #menu-flters ul li a:hover {
+    background-color: #f1f1f1;
+    color: #FFB03B;
+  }
+
+  .quantity-selection {
+    display: none;
+  }
+
+  .menu-item.selected .quantity-selection {
+    display: block;
+  }
+
+  /* Select Button Styles */
+.select-btn {
+  display: block;
+  width: 30%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #fff;
+  color: #4458e8;
+  border: 2px solid #4458e8;
+  border-radius: 3px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+.select-btn:active,
+.select-btn.active {
+  background-color: #4458e8;
+  color: #fff;
+}
+#total-price {
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: right;
+}
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.cart-title {
+  flex: 1;
+}
+
+.cart-price {
+  flex: 1;
+  text-align: center;
+}
+
+.cart-quantity {
+  flex: 1;
+  text-align: center;
+}
+
+.cart-total-price {
+  flex: 1;
+  text-align: right;
+  margin-left: 300px;
+}
+
+.delete-btn {
+  margin-left: 10px;
+}
+.quantity-selection {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.quantity-selection input {
+  width: 60px;
+  margin-right: 10px;
+}
+
+.select-btn {
+  padding: 6px 12px;
+}
+.select-btn {
+  margin-bottom: 5px;
+}
+
+.quantity-selection {
+  display: flex;
+  align-items: center;
+  margin-left: 250px;
+  margin-top: -40px;
+}
+
+.quantity-selection input {
+  width: 60px;
+  margin-left: 5px;
+}
+
+
+  
+  
+  
+

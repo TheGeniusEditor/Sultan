@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Delicious</title>
+  <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
+  <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Satisfy|Bree+Serif|Candal|PT+Sans">
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+  <!-- menu -->
+  <section id="menu-list" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center marb-35">
+          <h1 class="header-h">Menu List</h1>
+        </div>
+
+        <div class="col-md-12 text-center" id="menu-flters">
+          <ul>
+            <li id="fv"><a class="filter" data-filter=".fv">Frankie Veg</a></li>
+            <li id="shawarma"><a class="filter" data-filter=".shawarma">Shawarma</a></li>
+            <li id="burger"><a class="filter" data-filter=".burger">Burgers</a></li>
+            <li id="fish"><a class="filter" data-filter=".fish">Fish Items</a></li>
+            <li id="subn"><a class="filter" data-filter=".subn">Sub & Club Non-Veg</a></li>
+            <li id="subv"><a class="filter" data-filter=".subv">Sub & Club Veg</a></li>
+            <li id="rnv"><a class="filter" data-filter=".rnv">Rolls Non-Veg</a></li>
+            <li id="rv"><a class="filter" data-filter=".rv">Rolls Veg</a></li>
+            <li id="snv"><a class="filter" data-filter=".snv">Starters Non-Veg</a></li>
+            <li id="sv"><a class="filter" data-filter=".sv">Starters Veg</a></li>
+            <li id="fnv"><a class="filter" data-filter=".fnv">Frenkie Non Veg</a></li>
+            <li id="cnv"><a class="filter" data-filter=".cnv">Chinese Non Veg</a></li>
+            <li id="cv"><a class="filter" data-filter=".cv">Chinese Veg</a></li>
+            <li id="soupn"><a class="filter" data-filter=".soupn">Soup Non-Veg</a></li>
+            <li id="soupv"><a class="filter" data-filter=".soupv">Soup Veg</a></li>
+            <li id="bir"><a class="filter" data-filter=".bir">Biryani</a></li>
+            <li id="tan"><a class="filter" data-filter=".tan">Tandoor</a></li>
+            <li id="tik"><a class="filter" data-filter=".tik">Tikka</a></li>
+            <li id="rot"><a class="filter" data-filter=".rot">Roti</a></li>
+            <li id="nig"><a class="filter" data-filter=".nig">North Indian Gravy</a></li>
+            <li id="vg"><a class="filter" data-filter=".vg">Veg Gravy</a></li>
+          </ul>
+        </div>
+
+        <div id="menu-wrapper"></div>
+      </div>
+    </div>
+  </section>
+  <!--/ menu -->
+<!-- Cart Section -->
+<section id="cart" class="section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center marb-35">
+        <h1 class="header-h">Your Cart</h1>
+      </div>
+      <div class="col-md-12" id="cart-items">
+        <!-- Cart items will be dynamically added here -->
+      </div>
+      <div class="col-md-12">
+        <form id="cart-form">
+          <div class="form-group">
+            <div id="total-price" class="text-center mt-4"></div>
+            <label for="customer-name">Customer Name:</label>
+            <input type="text" id="customer-name" name="customer-name" class="form-control" placeholder="Enter your name" required>
+          </div>
+          <div class="form-group">
+            <label for="table-number">Table Number:</label>
+            <input type="text" id="table-number" name="table-number" class="form-control" placeholder="Enter table number" required>
+          </div>
+          <label for="orderType">Order Type:</label>
+          <select id="orderType" name="orderType" required>
+          <option value="Dine-in">Dine-in</option>
+          <option value="Takeaway">Takeaway</option>
+          </select>
+          <button id="checkout-btn" class="select-btn" type="submit">Checkout</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  <script type="text/javascript">
+    const menuItems = {
+      "fv": [
+        { title: "Veg Frankie", price: "50/-"},
+        { title: "Paneer Frankie", price: "60/-"},
+        { title: "Mushroom Frankie", price: "60/-"},
+        { title: "Egg Panner Frankie", price: "70/-"},
+        { title: "Egg Mushroom Frankie", price: "70/-"}
+      ],
+      "shawarma": [
+        { title: "Chicken Shawarma With Salad & Fries", price: "60/-"},
+        { title: "Chicken Shawarma With Onion", price: "70/-"},
+        { title: "Chicken Shawarma (Only Chicken)", price: "80/-"},
+        { title: "Chicken Shawarma With Cheese", price: "100/-"},
+        { title: "Chicken Shawarma With French Fries", price: "85/-"},
+        { title: "Chicen Shawarma (Only Chicken In Parota)", price: "90/-"},
+        { title: "Chicken Shawarma With Chutney", price: "85/-"},
+        { title: "Chicken Shawarma With Schezwan Sauce And French Fries", price: "90/-"},
+        { title: "Jumbo Chicken Shawarma With Salad & Fries", price: "100/-"},
+        { title: "Only Chciken Jumbo", price: "130/-"},
+        { title: "Only Chciken Jumbo With Cheese", price: "160/-"},
+        { title: "Only Chicken Mint Chutney Jumbo", price: "140/-"},
+        { title: "Schezwan Chciken Jumbo", price: "150/-"},
+        { title: "Mexican Chicken Jumbo", price: "70/-"},
+        { title: "Falafel Roll", price: "130/-"},
+        { title: "Falafel Jumbo Roll", price: "90/-"},
+        { title: "Falafel Plate 6 Pcs", price: "110/-"},
+        { title: "Plate Shawarma with(3pcs Rumali Roti/2 Parota)", price: "140/-"},
+        { title: "Plate Shawarma Combo With French Fries, Mayo Dip", price: "140/-"},
+        { title: "Plate Shawarma Only Chicken", price: "140/-"},
+        { title: "Sub Shawarma", price: "90/-"},
+        { title: "Bowl Shawarma(Mix)", price: "100/-"},
+        { title: "Bowl Shawarma (Only Chicken)", price: "130/-"}
+      ],
+      "burger": [
+        { title: "Chilli Chicken Burger", price: "80/-"},
+        { title: "Chicken Manchurian Burger", price: "80/-"},
+        { title: "Chicken Nuggets Burger", price: "80/-"},
+        { title: "Pepper Chicken Burger", price: "80/-"},
+        { title: "Chicken Tikks Burger", price: "80/-"},
+        { title: "Crispy Tikks Burger", price: "70/-"},
+        { title: "Grill Chicken Burger", price: "70/-"},
+        { title: "Chicken Keema Burger", price: "70/-"},
+        { title: "Veg Cheese Burger", price: "70/-"},
+        { title: "Veg Panner Burger", price: "70/-"},
+        { title: "Veg Mushroom Burger", price: "70/-"},
+        { title: "Veg Aloo Tikka Burger", price: "70/-"},
+        { title: "Egg Burger", price: "50/-"},
+        { title: "Double Egg Burger", price: "60/-"},
+        { title: "Jumbo Burger", price: "120/-"},
+      ],
+      "fish": [
+        { title: "Fish Masala", price: "170/-"},
+        { title: "Fish Chilli", price: "180/-"},
+        { title: "Fish Manchurian", price: "190/-"},
+        { title: "Bangada Tawa Fry", price: "Seasonal/-"},
+        { title: "Prawns Tawa Fry", price: "Seasonal/-"}
+      ],
+      "subn": [
+        { title: "Chciken Sub", price: "80/-"},
+        { title: "Chicken Club Sub", price: "90/-"},
+        { title: "Chicken Manchurian Sub", price: "80/-"},
+        { title: "Chilli Chicken Sub", price: "80/-"},
+        { title: "Pepper Chicken Sub", price: "80/-"},
+        { title: "Schezwan Chicken Sub", price: "90/-"},
+        { title: "Chicken Tikka Sub", price: "90/-"},
+        { title: "Chicken Salami Sub", price: "90/-"},
+        { title: "Chicken Sausage Sub", price: "90/-"},
+        { title: "Chicken Ham Sub", price: "90/-"},
+        { title: "Chicken Kheema Sub", price: "90/-"}
+      ],
+      "subv": [
+        { title: "Veg Club Sub", price: "70/-"},
+        { title: "Veg Cheese Sub", price: "80/-"},
+        { title: "Veg Panner Tikka Sub", price: "80/-"},
+        { title: "Veg Mushroom Tikka Sub", price: "80/-"},
+        { title: "Aloo Tikka Sub", price: "70/-"},
+        { title: "Falafel Sub", price: "80/-"}
+      ],
+      "rnv": [
+        { title: "Chicken Tikka Roll(Jumbo)", price: "70/-"},
+        { title: "Chicken Tikka Roll(Medium)", price: "80/-"},
+        { title: "Chicken Tikka Roll(Regular)", price: "80/-"},
+        { title: "Chicken Hariyali Tikka Roll(Jumbo)", price: "80/-"},
+        { title: "Chicken Hariyali Tikka Roll(Medium)", price: "70/-"},
+        { title: "Chicken Hariyali Tikka Roll(Regular)", price: "80/-"},
+        { title: "Dragon Chicken Roll", price: "70/-"},
+        { title: "Chilli Chicken Roll", price: "80/-"},
+        { title: "Chicken Nawabi Roll", price: "80/-"},
+        { title: "Chicken Spring Roll", price: "80/-"},
+        { title: "Grill Chicken Roll", price: "70/-"},
+        { title: "Club Chicken Roll", price: "80/-"},
+        { title: "Chicken Manchurian Roll", price: "80/-"},
+        { title: "Pepper Chicken Roll", price: "70/-"},
+        { title: "Lemon Chicken Roll", price: "80/-"}
+      ],
+      "rv": [
+        { title: "Veg Panner Tikka Roll", price: "80/-"},
+        { title: "Veg Aloo Tikka Roll", price: "70/-"},
+        { title: "Veg Mushroom Roll", price: "80/-"}
+      ],
+      "snv": [
+        { title: "Apollo Chicken", price: "150/-"},
+        { title: "Chicken Majestic", price: "160/-"},
+        { title: "Chicken Popcorn", price: "100/-"},
+        { title: "Chicken Kabab", price: "150/-"},
+        { title: "Dragon Chicken", price: "150/-"},
+        { title: "Chicken Nuggets(6 Pcs)", price: "100/-"},
+        { title: "Chicken Sausage(4 Pcs)", price: "100/-"},
+        { title: "Chicken Lollipop(5 Pcs)", price: "130/-"},
+        { title: "Juicy Lollipop", price: "130/-"},
+        { title: "Chicken Kabab Full", price: "150/-"},
+        { title: "Chicken Kabab Half", price: "100/-"},
+        { title: "Boneless Chilli Chicken(10 Pcs)", price: "130/-"},
+        { title: "Boneless Chicken Manchurian", price: "130/-"},
+        { title: "Boneless Salted Garlic Chicken", price: "140/-"},
+        { title: "Pepper Chicken(10 Pcs)", price: "130/-"},
+        { title: "Lemon Chicken(10 Pcs)", price: "100/-"},
+        { title: "Schezwan Chicken(10 pcs)", price: "120/-"},
+        { title: "Chicken 65(10 Pcs)", price: "120/-"}
+      ],
+      "sv": [
+        { title: "Gobi Manchurian", price: "100/-"},
+        { title: "Mushroom Manchurian", price: "120/-"},
+        { title: "Paneer Chilli", price: "120/-"},
+        { title: "Paneer Chatpatta", price: "120/-"},
+        { title: "Panner 65", price: "120/-"},
+        { title: "Hariyali Tikka(7 Pcs)", price: "150/-"},
+        { title: "Paneer Tikka(6 Pcs)", price: "150/-"},
+        { title: "Aloo Tikka(4 Pcs)", price: "100/-"},
+        { title: "French Fries", price: "80/-"},
+        { title: "French Fries(Large)", price: "120/-"},
+        { title: "French Fries Spicy", price: "90/-"}
+      ],
+      "fnv": [
+        { title: "Chicken Frankie", price: "70/-"},
+        { title: "Single Egg Chicken Frankie", price: "70/-"},
+        { title: "Double Egg Chicken Frankie", price: "90/-"},
+        { title: "Double Egg Double Chicken Frankie", price: "100/-"},
+        { title: "Single Egg Frankie", price: "40/-"},
+        { title: "Double Egg Frankie", price: "50/-"}
+      ],
+      "cnv": [
+        { title: "Chicken Fried Rice", price: "110/-"},
+        { title: "Schezwan Fried Rice", price: "130/-"},
+        { title: "Egg fried Rice", price: "90/-"},
+        { title: "Chicken Noodles", price: "110/-"},
+        { title: "Schezwan Chicken Noodles", price: "120/-"},
+        { title: "Egg Noodles", price: "100/-"}
+      ],
+      "cv": [
+        { title: "Mix Vegetable Fried Rice", price: "110/-"},
+        { title: "Paneer Fried Rice", price: "130/-"},
+        { title: "Schezwan Vegetable Fried Rice", price: "90/-"},
+        { title: "Mushroom Fried Rice", price: "110/-"},
+        { title: "Mixed Vegetable Noodles", price: "120/-"},
+        { title: "Paneer Noodles", price: "100/-"},
+        { title: "Schezwan Vegetable Noodles", price: "120/-"},
+        { title: "Mushroom Noodles", price: "100/-"}
+      ],
+      "soupn": [
+        { title: "Chicken Hot & Sour Soup", price: "70/-"},
+        { title: "Chicken Manchow Soup", price: "70/-"},
+        { title: "Chicken Lemon Coriander Soup", price: "70/-"}
+      ],
+      "soupv": [
+        { title: "Veg Hot & Sour Soup", price: "60/-"},
+        { title: "Cream Of Mushroom Soup", price: "60/-"},
+        { title: "Cream Of Tomato Soup", price: "60/-"},
+        { title: "Veg Manchow Soup", price: "60/-"}
+      ],
+      "bir": [
+        { title: "Hyderbadi Chicken Dum Biryani", price: "130/-"},
+        { title: "Sultan Spl Biryani", price: "150/-"},
+        { title: "Egg Biryani", price: "110/-"},
+        { title: "Lollipop Biryani", price: "150/-"},
+        { title: "Mutton Biryani", price: "200/-"},
+        { title: "Tandoori Chicken Biryani", price: "150/-"},
+        { title: "Pesawari Biryani", price: "150/-"},
+        { title: "Fish Biryani", price: "180/-"},
+        { title: "Biryani Combo + Coke", price: "160/-"},
+        { title: "Paneer Biryani", price: "100/-"}
+      ],
+      "tan": [
+        { title: "Chicken Tandoori (QUATER)", price: "100"},
+        { title: "Chicken Tandoori (HALF)", price: "200/-"},
+        { title: "Chicken Tandoori (FULL)", price: "400/-"},
+        { title: "Alfaham (QUATER)", price: "100/-"},
+        { title: "Alfaham (HALF)", price: "200/-"},
+        { title: "Alfaham (FULL)", price: "400/-"},
+        { title: "Mandi With Alfaham (QUATER)", price: "150/-"},
+        { title: "Mandi With Alfaham (HALF)", price: "280/-"},
+        { title: "Mandi With Alfaham (FULL)", price: "580/-"}
+      ],
+      "tik": [
+        { title: "Chicken Tikka (6pc)", price: "130/-"},
+        { title: "Malai Kabab ", price: "150/-"}
+      ],
+      "rot": [
+        { title: "Tandoori Roti", price: "25/-"},
+        { title: "Tandoori Butter Roti", price: "30/-"},
+        { title: "Kulcha", price: "25/-"},
+        { title: "Butter Kulcha", price: "30/-"},
+        { title: "Plain Naan", price: "30/-"},
+        { title: "Butter Naan", price: "35/-"},
+        { title: "Garlic Naan", price: "40/-"},
+        { title: "Parota Tandoori", price: "20/-"},
+        { title: "Khubus", price: "10/-"},
+        { title: "Roomali Roti", price: "10/-"},
+        { title: "Kerala Parota", price: "20/-"},
+        { title: "Chapati", price: "20/-"}
+      ],
+      "nig": [
+        { title: "Tandoori Chicken Masala (Half)", price: "130/-"},
+        { title: "Tandoori Chicken Masala (Full)", price: "220/-"},
+        { title: "Murg Musallam (Half)", price: "130/-"},
+        { title: "Murg Musallam (Full)", price: "220/-"},
+        { title: "Aziz Murg Masala (Half)", price: "130/-"},
+        { title: "Aziz Murg Masala (Full)", price: "220/-"},
+        { title: "Murg Kadai Shimlamirch (Half)", price: "120/-"},
+        { title: "Murg Kadai Shimlamirch (Full)", price: "200/-"},
+        { title: "Malabar Chicken Curry (Half)", price: "120/-"},
+        { title: "Malabar Chicken Curry (Full)", price: "200/-"},
+        { title: "Chicken Chatinadu (Half)", price: "130/-"},
+        { title: "Chicken Chatinadu (Full)", price: "220/-"},
+        { title: "Chicken Tikka Masala (Half)", price: "140/-"},
+        { title: "Chicken Tikka Masala (Full)", price: "230/-"},
+        { title: "Butter Chicken (Half)", price: "130/-"},
+        { title: "Butter Chicken (Full)", price: "200/-"},
+        { title: "Chicken Kolhapuri (Half)", price: "130/-"},
+        { title: "Chicken Kolhapuri (Full)", price: "200/-"},
+        { title: "Chicken Hyderabadi (Half)", price: "130/-"},
+        { title: "Chicken Hyderabadi (Full)", price: "220/-"},
+        { title: "Chicken Keema Masala (Half)", price: "130/-"},
+        { title: "Chicken Keema Masala (Full)", price: "220/-"},
+        { title: "Mutton Masala (Half)", price: "210/-"},
+        { title: "Mutton Masala (Full)", price: "350/-"},
+        { title: "Mutton Rogon Josh (Half)", price: "210/-"},
+        { title: "Mutton Rogon Josh (Full)", price: "350/-"},
+        { title: "Mutton Pepper Dry (Half)", price: "280/-"},
+        { title: "Mutton Pepper Dry (Full)", price: "540/-"},
+        { title: "Ando Masala (Half)", price: "80/-"},
+        { title: "Ando Masala (Full)", price: "150/-"},
+        { title: "Murg Tikka Lababdar (Half)", price: "100/-"},
+        { title: "Murg Tikka Lababdar (Full)", price: "100/-"},
+        { title: "Bhunagose Ginger (Half)", price: "150/-"},
+        { title: "Bhunagose Ginger (Full)", price: "280/-"},
+        { title: "Chicken Do Pyaza (Half)", price: "130/-"},
+        { title: "Chicken Do Pyaza (Full)", price: "230/-"},
+        { title: "Angoori Malai Kofta (Half)", price: "150/-"},
+        { title: "Angoori Malai Kofta (Full)", price: "320/-"},
+        { title: "Hyderbadi Murg Masala (Half)", price: "160/-"},
+        { title: "Hyderbadi Murg Masala (Full)", price: "320/-"}
+      ],
+      "vg": [
+        { title: "Paneer Kadai (Half)", price: "100/-"},
+        { title: "Paneer Kadai (Full)", price: "200/-"},
+        { title: "Paneer Tikka Masala (Half)", price: "120/-"},
+        { title: "Paneer Tikka Masala (Full)", price: "210/-"},
+        { title: "Paneer Makhani (Half)", price: "120/-"},
+        { title: "Paneer Makhani (Full)", price: "210/-"},
+        { title: "Paneer Butter Masala (Half)", price: "120/-"},
+        { title: "Paneer Butter Masala (Full)", price: "210/-"},
+        { title: "Paneer Angare Smoky (Half)", price: "130/-"},
+        { title: "Paneer Angare Smoky (Full)", price: "220/-"},
+        { title: "Mushroom Masala (Half)", price: "120/-"},
+        { title: "Mushroom Masala (Full)", price: "200/-"},
+        { title: "Mix Veg Masala (Half)", price: "100/-"},
+        { title: "Mix Veg Masala (Full)", price: "200/-"},
+        { title: "Veg Handi Masala (Half)", price: "110/-"},
+        { title: "Veg Handi Masala (Full)", price: "200/-"},
+        { title: "Veg Kadai (Half)", price: "110/-"},
+        { title: "Veg Kadai (Full)", price: "200/-"},
+        { title: "Veg Jaipuri (Half)", price: "110/-"},
+        { title: "Veg Jaipuri (Full)", price: "200/-"},
+        { title: "Dal Fry (Half)", price: "90/-"},
+        { title: "Dal Fry (Full)", price: "150/-"},
+        { title: "Butter Dal Fry (Half)", price: "100/-"},
+        { title: "Butter Dal Fry (Full)", price: "220/-"},
+        { title: "Dal Tadka (Half)", price: "100/-"},
+        { title: "Dal Tadka (Full)", price: "170/-"}
+      ],
+
+    };
+        function renderMenuItems() {
+            const menuWrapper = document.getElementById('menu-wrapper');
+            menuWrapper.innerHTML = ''; // Clear existing items
+
+            Object.keys(menuItems).forEach(category => {
+                menuItems[category].forEach((item, index) => {
+                    menuWrapper.innerHTML += `
+                    <div class="${category} menu-restaurant menu-item">
+                        <span class="clearfix">
+                            <a class="menu-title" href="#" data-meal-img="${item.img}">${item.title}</a>
+                            <span style="left: 166px; right: 44px;" class="menu-line"></span>
+                            <span class="menu-price">${item.price}</span>
+                        </span>
+                        <button class="select-btn">Select</button>
+                        <div class="quantity-selection">
+                            <label for="quantity-${category}-${index}">Quantity:</label>
+                            <input type="number" id="quantity-${category}-${index}" name="quantity-${category}-${index}" min="1" max="20" value="1">
+                        </div>
+                    </div>`;
+                });
+            });
+        }
+
+        const items = ['fv', 'shawarma', 'burger', 'fish', 'subn', 'subv', 'rnv', 'rv', 'snv', 'sv', 'fnv', 'cnv', 'cv', 'soupn', 'soupv', 'bir', 'tan', 'tik', 'rot', 'nig', 'vg'];
+
+        items.forEach(id => {
+            document.getElementById(id).onclick = () => {
+                showItems(id);
+                setSelected();
+            };
+        });
+
+        let cart = [];
+
+        function showItems(filterClass) {
+            document.querySelectorAll('#menu-wrapper .menu-item').forEach(item => {
+                item.style.display = item.classList.contains(filterClass) || filterClass === 'menu-restaurant' ? 'block' : 'none';
+            });
+        }
+
+        function setSelected() {
+            document.querySelectorAll('#menu-flters ul li a').forEach(button => {
+                button.classList.remove('active');
+            });
+            const activeButton = document.querySelector('#menu-flters ul li a[data-filter=".' + getCurrentFilter() + '"]');
+            if (activeButton) activeButton.classList.add('active');
+        }
+
+        function getCurrentFilter() {
+            const activeElement = document.querySelector('#menu-flters ul li a.active');
+            return activeElement ? activeElement.getAttribute('data-filter').substring(1) : '';
+        }
+
+        document.addEventListener('click', function (e) {
+            if (e.target.classList.contains('select-btn')) {
+                const itemElement = e.target.parentElement;
+                const item = {
+                    title: itemElement.querySelector('.menu-title').textContent,
+                    price: itemElement.querySelector('.menu-price').textContent,
+                    img: itemElement.querySelector('a').getAttribute('data-meal-img')
+                };
+                const quantity = parseInt(itemElement.querySelector('input[type="number"]').value, 10);
+                updateCart(item, quantity);
+            } else if (e.target.classList.contains('delete-btn')) {
+                cart.splice(e.target.getAttribute('data-index'), 1);
+                renderCart();
+            }
+        });
+
+        function updateCart(item, quantity) {
+            if (quantity <= 0) {
+                alert("Quantity must be at least 1");
+                return;
+            }
+
+            const existingItem = cart.find(cartItem => cartItem.title === item.title);
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({ ...item, quantity });
+            }
+            renderCart();
+        }
+
+        function calculateTotalPrice() {
+            return cart.reduce((total, cartItem) => {
+                const price = parseFloat(cartItem.price.replace('/-', '').trim());
+                return total + (price * cartItem.quantity);
+            }, 0);
+        }
+
+        function updateTotalPrice() {
+            const totalPrice = calculateTotalPrice().toFixed(2);
+            document.getElementById('total-price').innerHTML = `Total Price: ${totalPrice}/-`;
+        }
+
+        function renderCart() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = cart.map((cartItem, index) => {
+                const totalPrice = (parseFloat(cartItem.price.replace('/-', '')) * cartItem.quantity).toFixed(2);
+                return `
+                <div class="cart-item">
+                    <span class="clearfix">
+                        <span class="cart-title">${cartItem.title}</span>
+                        <span class="cart-price">${cartItem.price}</span>
+                        <span class="cart-quantity">Quantity: ${cartItem.quantity}</span>
+                        <button class="delete-btn" data-index="${index}">Delete</button>
+                        <span class="cart-total-price">${totalPrice}/-</span>
+                    </span>
+                </div>
+                `;
+            }).join('');
+            updateTotalPrice();
+        }
+
+document.getElementById('checkout-btn').onclick = async function (event) {
+    event.preventDefault();
+
+    if (cart.length === 0) return alert('Your cart is empty!');
+
+    const customerName = document.getElementById('customer-name').value.trim();
+    const tableNumber = document.getElementById('table-number').value.trim();
+    const orderType = document.getElementById('orderType').value; // Get the order type value
+
+    if (!customerName || !tableNumber) {
+        alert('Please enter your name and table number.');
+        return;
+    }
+
+    const totalPrice = calculateTotalPrice().toFixed(2);
+
+    const cartData = {
+        customerName,
+        tableNumber,
+        orderType, // Include orderType in the cartData object
+        cartItems: cart,
+        totalPrice
+    };
+
+    try {
+        const response = await fetch('/checkout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(cartData)
+        });
+
+        if (response.ok) {
+            const result = await response.text();
+            alert(result);
+        } else {
+            alert('Error: Could not complete the order. Please try again.');
+        }
+    } catch (error) {
+        alert('Error: Could not complete the order. Please try again.');
+    }
+};
+
+
+        if (typeof renderMenuItems === 'function') {
+            renderMenuItems();
+        }
+
+        showItems('fv');
+    </script>
+</body>
+
+</html>

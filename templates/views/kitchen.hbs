@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitchen Orders</title>
+    <style>
+        /* Basic styles for the kitchen screen */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            padding: 20px;
+        }
+        .order {
+            border: 2px solid #333;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #fff;
+            width: 400px; /* Increase width for better print formatting */
+        }
+        .order-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .order-type {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .order-item {
+            margin-bottom: 10px;
+        }
+        .order-footer {
+            border-top: 1px solid #333;
+            padding-top: 10px;
+            font-weight: bold;
+            text-align: right;
+        }
+        .print-btn {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .earnings {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #fff;
+            border: 2px solid #333;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .earnings-records {
+            margin-top: 20px;
+        }
+        .earnings-records table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .earnings-records th, .earnings-records td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: left;
+        }
+        .earnings-records th {
+            background-color: #f3f3f3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kitchen Orders</h1>
+    <div class="earnings">
+        Daily Earnings: ₹<span id="daily-earnings">0.00</span>
+    </div>
+    <div id="orders"></div>
+
+    <div class="earnings-records">
+        <h2>Earnings Records</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Total Earnings</th>
+                </tr>
+            </thead>
+            <tbody id="earnings-records-body">
+                <!-- Records will be dynamically inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let dailyEarnings = 0;
+
+        async function fetchOrders() {
+            try {
+                const response = await fetch('/api/orders');
+                const orders = await response.json();
+                
+                const ordersContainer = document.getElementById('orders');
+                ordersContainer.innerHTML = '';
+
+                dailyEarnings = 0; // Reset daily earnings before calculating
+
+                orders.forEach(order => {
+                    const orderDiv = document.createElement('div');
+                    orderDiv.classList.add('order');
+
+                    const orderTitle = document.createElement('div');
+                    orderTitle.classList.add('order-title');
+                    orderTitle.textContent = `Order for ${order.customerName} (Table ${order.tableNumber})`;
+
+                    const orderType = document.createElement('div');
+                    orderType.classList.add('order-type');
+                    orderType.textContent = `Type: ${order.orderType}`; // Display the order type
+
+                    orderDiv.appendChild(orderTitle);
+                    orderDiv.appendChild(orderType);
+
+                    let orderTotalPrice = 0;
+
+                    order.items.forEach(item => {
+                        const itemTotal = parseFloat(item.price.replace('₹', '')) * item.quantity;
+                        orderTotalPrice += itemTotal;
+
+                        const orderItem = document.createElement('div');
+                        orderItem.classList.add('order-item');
+                        orderItem.innerHTML = `${item.title} x ${item.quantity} @ ${item.price} = ₹${itemTotal.toFixed(2)}`;
+
+                        orderDiv.appendChild(orderItem);
+                    });
+
+                    const footer = document.createElement('div');
+                    footer.classList.add('order-footer');
+                    footer.innerHTML = `Total: ₹${orderTotalPrice.toFixed(2)}`;
+
+                    orderDiv.appendChild(footer);
+
+                    const printButton = document.createElement('button');
+                    printButton.classList.add('print-btn');
+                    printButton.textContent = 'Print';
+                    printButton.onclick = () => printReceipt(orderDiv, order.customerName, order.tableNumber);
+
+                    orderDiv.appendChild(printButton);
+
+                    ordersContainer.appendChild(orderDiv);
+
+                    dailyEarnings += orderTotalPrice; // Add order total to daily earnings
+                });
+
+                // Update daily earnings display
+                document.getElementById('daily-earnings').textContent = dailyEarnings.toFixed(2);
+
+                // Save daily earnings record
+                saveEarningsRecord(new Date().toISOString().split('T')[0], dailyEarnings);
+
+            } catch (error) {
+                console.error('Error fetching orders:', error);
+            }
+        }
+
+        async function saveEarningsRecord(date, totalEarnings) {
+            try {
+                await fetch('/api/save-earnings-record', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ date, totalEarnings })
+                });
+                updateEarningsRecords();
+            } catch (error) {
+                console.error('Error saving earnings record:', error);
+            }
+        }
+
+        async function updateEarningsRecords() {
+            try {
+                const response = await fetch('/api/earnings-records');
+                const records = await response.json();
+                
+                const recordsBody = document.getElementById('earnings-records-body');
+                recordsBody.innerHTML = '';
+
+                records.forEach(record => {
+                    const row = document.createElement('tr');
+
+                    const dateCell = document.createElement('td');
+                    dateCell.textContent = record.date;
+
+                    const earningsCell = document.createElement('td');
+                    earningsCell.textContent = `₹${record.totalEarnings.toFixed(2)}`;
+
+                    row.appendChild(dateCell);
+                    row.appendChild(earningsCell);
+
+                    recordsBody.appendChild(row);
+                });
+
+            } catch (error) {
+                console.error('Error updating earnings records:', error);
+            }
+        }
+
+        function printReceipt(element, customerName, tableNumber) {
+            const printWindow = window.open('', '', 'height=400,width=400');
+            printWindow.document.write('<html><head><title>Print</title>');
+            printWindow.document.write('<style>');
+            printWindow.document.write(`
+                @media print { 
+                    .print-btn { display: none; }
+                    body {
+                        font-family: Arial, sans-serif;
+                        padding: 20px;
+                    }
+                    .receipt-header {
+                        text-align: center;
+                        margin-bottom: 20px;
+                    }
+                    .receipt-header h2 {
+                        margin: 0;
+                    }
+                    .receipt-footer {
+                        border-top: 1px solid #333;
+                        padding-top: 10px;
+                        font-weight: bold;
+                        text-align: right;
+                    }
+                    .order-item {
+                        margin-bottom: 10px;
+                    }
+                    .order-type {
+                        margin-bottom: 10px;
+                        font-weight: bold;
+                    }
+                }
+            `);
+            printWindow.document.write('</style></head><body>');
+
+            // Adding custom header for receipt
+            printWindow.document.write(`
+                <div class="receipt-header">
+                    <h2>Sultan</h2>
+                    <p><strong>Customer Name:</strong> ${customerName}</p>
+                    <p><strong>Table Number:</strong> ${tableNumber}</p>
+                </div>
+            `);
+
+            printWindow.document.write(element.innerHTML); // Write the order details
+
+            // Adding custom footer for receipt
+            printWindow.document.write(`
+                <div class="receipt-footer">
+                    Thank you for dining with us!
+                </div>
+            `);
+
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
+        }
+
+        // Poll the server for new orders every 5 seconds
+        setInterval(fetchOrders, 5000);
+        fetchOrders();
+        updateEarningsRecords();
+    </script>
+</body>
+</html>
