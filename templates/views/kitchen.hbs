@@ -23,7 +23,7 @@
             font-size: 18px;
             margin-bottom: 10px;
         }
-        .order-type {
+        .order-type, .payment-type {
             margin-bottom: 10px;
             font-weight: bold;
         }
@@ -119,8 +119,13 @@
                     orderType.classList.add('order-type');
                     orderType.textContent = `Type: ${order.orderType}`; // Display the order type
 
+                    const paymentType = document.createElement('div');
+                    paymentType.classList.add('payment-type');
+                    paymentType.textContent = `Payment Type: ${order.paymentType}`; // Display the payment type
+
                     orderDiv.appendChild(orderTitle);
                     orderDiv.appendChild(orderType);
+                    orderDiv.appendChild(paymentType);
 
                     let orderTotalPrice = 0;
 
@@ -234,7 +239,7 @@
                     .order-item {
                         margin-bottom: 10px;
                     }
-                    .order-type {
+                    .order-type, .payment-type {
                         margin-bottom: 10px;
                         font-weight: bold;
                     }

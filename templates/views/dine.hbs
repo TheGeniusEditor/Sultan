@@ -57,37 +57,48 @@
   </section>
   <!--/ menu -->
 <!-- Cart Section -->
-<section id="cart" class="section-padding">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 text-center marb-35">
-        <h1 class="header-h">Your Cart</h1>
-      </div>
-      <div class="col-md-12" id="cart-items">
-        <!-- Cart items will be dynamically added here -->
-      </div>
-      <div class="col-md-12">
-        <form id="cart-form">
-          <div class="form-group">
-            <div id="total-price" class="text-center mt-4"></div>
-            <label for="customer-name">Customer Name:</label>
-            <input type="text" id="customer-name" name="customer-name" class="form-control" placeholder="Enter your name" required>
-          </div>
-          <div class="form-group">
-            <label for="table-number">Table Number:</label>
-            <input type="text" id="table-number" name="table-number" class="form-control" placeholder="Enter table number" required>
-          </div>
-          <label for="orderType">Order Type:</label>
-          <select id="orderType" name="orderType" required>
-          <option value="Dine-in">Dine-in</option>
-          <option value="Takeaway">Takeaway</option>
-          </select>
-          <button id="checkout-btn" class="select-btn" type="submit">Checkout</button>
-        </form>
+
+  <!-- Cart Section -->
+  <section id="cart" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center marb-35">
+          <h1 class="header-h">Your Cart</h1>
+        </div>
+        <div class="col-md-12" id="cart-items">
+          <!-- Cart items will be dynamically added here -->
+        </div>
+        <div class="col-md-12">
+          <form id="cart-form">
+            <div class="form-group">
+              <div id="total-price" class="text-center mt-4"></div>
+              <label for="customer-name">Customer Name:</label>
+              <input type="text" id="customer-name" name="customer-name" class="form-control" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+              <label for="table-number">Table Number:</label>
+              <input type="text" id="table-number" name="table-number" class="form-control" placeholder="Enter table number" required>
+            </div>
+            <div class="form-group">
+              <label for="orderType">Order Type:</label>
+              <select id="orderType" name="orderType" required>
+                <option value="Dine-in">Dine-in</option>
+                <option value="Takeaway">Takeaway</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="paymentType">Payment Type:</label>
+              <select id="paymentType" name="paymentType" required>
+                <option value="UPI">UPI</option>
+                <option value="Cash">Cash</option>
+              </select>
+            </div>
+            <button id="checkout-btn" class="select-btn" type="submit">Checkout</button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
 
 
@@ -496,48 +507,50 @@
         }
 
 document.getElementById('checkout-btn').onclick = async function (event) {
-    event.preventDefault();
+        event.preventDefault();
 
-    if (cart.length === 0) return alert('Your cart is empty!');
+        if (cart.length === 0) return alert('Your cart is empty!');
 
-    const customerName = document.getElementById('customer-name').value.trim();
-    const tableNumber = document.getElementById('table-number').value.trim();
-    const orderType = document.getElementById('orderType').value; // Get the order type value
+        const customerName = document.getElementById('customer-name').value.trim();
+        const tableNumber = document.getElementById('table-number').value.trim();
+        const orderType = document.getElementById('orderType').value;
+        const paymentType = document.getElementById('paymentType').value; // Get the payment type value
 
-    if (!customerName || !tableNumber) {
-        alert('Please enter your name and table number.');
-        return;
-    }
+        if (!customerName || !tableNumber) {
+            alert('Please enter your name and table number.');
+            return;
+        }
 
-    const totalPrice = calculateTotalPrice().toFixed(2);
+        const totalPrice = calculateTotalPrice().toFixed(2);
 
-    const cartData = {
-        customerName,
-        tableNumber,
-        orderType, // Include orderType in the cartData object
-        cartItems: cart,
-        totalPrice
-    };
+        const cartData = {
+            customerName,
+            tableNumber,
+            orderType,
+            paymentType, // Include paymentType in the cartData object
+            cartItems: cart,
+            totalPrice
+        };
 
-    try {
-        const response = await fetch('/checkout', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(cartData)
-        });
+        try {
+            const response = await fetch('/checkout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(cartData)
+            });
 
-        if (response.ok) {
-            const result = await response.text();
-            alert(result);
-        } else {
+            if (response.ok) {
+                const result = await response.text();
+                alert(result);
+            } else {
+                alert('Error: Could not complete the order. Please try again.');
+            }
+        } catch (error) {
             alert('Error: Could not complete the order. Please try again.');
         }
-    } catch (error) {
-        alert('Error: Could not complete the order. Please try again.');
-    }
-};
+    };
 
 
         if (typeof renderMenuItems === 'function') {

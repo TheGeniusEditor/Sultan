@@ -31,8 +31,10 @@ const cartSchema = new mongoose.Schema({
     }],
     totalPrice: String,
     orderType: String, // Added field for Dine-in or Takeaway
+    paymentType: String, // Added field for Payment Type
     createdAt: { type: Date, default: Date.now }
 });
+
 
 const Cart = mongoose.model("Cart", cartSchema);
 
@@ -67,7 +69,7 @@ app.get("/dine", (req, res) => {
 // Route to handle checkout
 app.post("/checkout", async (req, res) => {
     try {
-        const { customerName, tableNumber, cartItems, totalPrice, orderType } = req.body; // Included orderType
+        const { customerName, tableNumber, cartItems, totalPrice, orderType, paymentType } = req.body; // Included paymentType
 
         // Calculate totalItemPrice for each cart item
         const updatedCartItems = cartItems.map(item => ({
@@ -80,7 +82,8 @@ app.post("/checkout", async (req, res) => {
             tableNumber,
             items: updatedCartItems,
             totalPrice,
-            orderType // Save the order type
+            orderType, // Save the order type
+            paymentType // Save the payment type
         });
 
         await newCart.save();
@@ -106,6 +109,7 @@ app.post("/checkout", async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
+
 
 // Route for the kitchen display
 app.get("/kitchen", (req, res) => {
