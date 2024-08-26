@@ -37,7 +37,7 @@
             font-weight: bold;
             text-align: right;
         }
-        .print-btn {
+        .print-btn, .print-earnings-btn {
             margin-top: 20px;
             padding: 10px;
             background-color: #333;
@@ -82,6 +82,7 @@
 
     <div class="earnings-records">
         <h2>Earnings Records</h2>
+        <button class="print-earnings-btn" onclick="printEarningsRecords()">Print Earnings Records</button>
         <table>
             <thead>
                 <tr>
@@ -266,6 +267,41 @@
                 </div>
             `);
 
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
+        }
+
+        function printEarningsRecords() {
+            const earningsTable = document.querySelector('.earnings-records table').outerHTML;
+            const printWindow = window.open('', '', 'height=400,width=600');
+            printWindow.document.write('<html><head><title>Print Earnings Records</title>');
+            printWindow.document.write('<style>');
+            printWindow.document.write(`
+                @media print { 
+                    .print-earnings-btn { display: none; }
+                    body {
+                        font-family: Arial, sans-serif;
+                        padding: 20px;
+                    }
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                    }
+                    th, td {
+                        border: 1px solid #333;
+                        padding: 8px;
+                        text-align: left;
+                    }
+                    th {
+                        background-color: #f3f3f3;
+                    }
+                }
+            `);
+            printWindow.document.write('</style></head><body>');
+            printWindow.document.write('<h2>Earnings Records</h2>');
+            printWindow.document.write(earningsTable);
             printWindow.document.write('</body></html>');
             printWindow.document.close();
             printWindow.focus();

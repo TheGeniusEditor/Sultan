@@ -30,11 +30,10 @@ const cartSchema = new mongoose.Schema({
         totalItemPrice: String
     }],
     totalPrice: String,
-    orderType: String, // Added field for Dine-in or Takeaway
-    paymentType: String, // Added field for Payment Type
+    orderType: String, // Dine-in or Takeaway
+    paymentType: String, // Payment Type
     createdAt: { type: Date, default: Date.now }
 });
-
 
 const Cart = mongoose.model("Cart", cartSchema);
 
@@ -69,7 +68,7 @@ app.get("/dine", (req, res) => {
 // Route to handle checkout
 app.post("/checkout", async (req, res) => {
     try {
-        const { customerName, tableNumber, cartItems, totalPrice, orderType, paymentType } = req.body; // Included paymentType
+        const { customerName, tableNumber, cartItems, totalPrice, orderType, paymentType } = req.body;
 
         // Calculate totalItemPrice for each cart item
         const updatedCartItems = cartItems.map(item => ({
@@ -82,13 +81,13 @@ app.post("/checkout", async (req, res) => {
             tableNumber,
             items: updatedCartItems,
             totalPrice,
-            orderType, // Save the order type
-            paymentType // Save the payment type
+            orderType,
+            paymentType
         });
 
         await newCart.save();
 
-        // Save daily earnings
+        // Save or update daily earnings
         const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
         const earningsRecord = await EarningsRecord.findOne({ date: today });
 
@@ -109,7 +108,6 @@ app.post("/checkout", async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
-
 
 // Route for the kitchen display
 app.get("/kitchen", (req, res) => {
@@ -166,8 +164,9 @@ app.get('/api/earnings-records', async (req, res) => {
 cron.schedule('0 0 * * *', async () => {
     try {
         console.log("Clearing orders at midnight");
-        await Cart.deleteMany({});
-        console.log("All orders have been deleted");
+        const cutoffDate = new Date(new Date().getTime() - (24 * 60 * 60 * 1000)); // 24 hours ago
+        await Cart.deleteMany({ createdAt: { $lt: cutoffDate } });
+        console.log("Old orders have been deleted");
     } catch (error) {
         console.error("Error clearing orders:", error);
     }
